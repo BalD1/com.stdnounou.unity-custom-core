@@ -1,0 +1,23 @@
+{
+  "name": "com.stdnounou.unity-custom-core",
+  "version": "1.0.0",
+  "displayName": "StdNounou Custom Core",
+  "description": "This is our own personal unity core functionalities.",
+  "unity": "2021.3",
+  "documentationUrl": "https://stdnounous-doc-1abfdd.webflow.io",
+  "dependencies": {
+	  "ayellowpaper.serialized-dictionary": "https://github.com/ayellowpaper/SerializedDictionary.git"
+ },
+  "author": {
+    "name": "BalD",
+    "email": "florianhusson1@gmail.com",
+    "url": "https://fh-portfolio-d3d69c.webflow.io"
+  },
+  "samples" : [
+  {
+	  "displayName": "Sample Scene",
+	  "description": "Scene showing how to use ComponentHolder",
+	  "path": "Samples~/ComponentsHolderSample"
+  }
+  ]
+}
