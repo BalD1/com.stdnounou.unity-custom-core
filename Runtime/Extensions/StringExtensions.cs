@@ -1,5 +1,5 @@
 
-namespace StdNounou
+namespace StdNounou.Core
 {
 	public static class StringExtensions
 	{

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace StdNounou
+namespace StdNounou.Core
 {
     public static class ImageExtensions
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace StdNounou
+namespace StdNounou.Core
 {
     public static class SpriteRendererExtensions
     {

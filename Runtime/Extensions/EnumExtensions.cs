@@ -1,6 +1,6 @@
 using System;
 
-namespace StdNounou
+namespace StdNounou.Core
 {
 	public static class EnumExtensions
 	{

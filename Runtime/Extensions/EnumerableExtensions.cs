@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace StdNounou
+namespace StdNounou.Core
 {
     public static class EnumerableExtensions
     {

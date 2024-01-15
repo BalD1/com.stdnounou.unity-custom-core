@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace StdNounou
+namespace StdNounou.Core
 {
     public static class ListExtensions
     {

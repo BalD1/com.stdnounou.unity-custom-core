@@ -1,6 +1,6 @@
 using UnityEditor;
 
-namespace StdNounou
+namespace StdNounou.Core.Editor
 {
     public static class EditorExtensions
     {
