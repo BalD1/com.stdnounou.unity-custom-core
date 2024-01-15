@@ -1,5 +1,5 @@
 {
-    "name": "StdNounou.core",
+    "name": "stdnounou.core.runtime",
     "rootNamespace": "",
     "references": [
         "GUID:d525ad6bd40672747bde77962f1c401e"
