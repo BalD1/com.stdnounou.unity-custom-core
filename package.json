@@ -5,9 +5,6 @@
   "description": "This is our own personal unity core functionalities.",
   "unity": "2021.3",
   "documentationUrl": "https://stdnounous-doc-1abfdd.webflow.io",
-  "dependencies": {
-	  "ayellowpaper.serialized-dictionary": "https://github.com/ayellowpaper/SerializedDictionary.git"
- },
   "author": {
     "name": "BalD",
     "email": "florianhusson1@gmail.com",
