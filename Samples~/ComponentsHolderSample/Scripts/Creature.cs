@@ -1,16 +1,19 @@
 using StdNounou.Core;
+using StdNounou.Core.ComponentsHolder;
 using UnityEngine;
 
 namespace StdNounou.Samples.HolderComponent
 {
 	public class Creature : MonoBehaviour
 	{
-		[SerializeField] private SimpleComponentHolder componentHolder;
+		[SerializeField] private SimpleComponentHolder simpleComponentHolder;
+		[SerializeField] private EnumComponentsHolder enumComponentHolder;
         [SerializeField] private AudioClip[] audiosToPlay;
 
         public void TryChangeRendererColor()
         {
-            E_HolderResult res = componentHolder.HolderTryGetComponent(E_ComponentTypes.Renderer, out SpriteRenderer renderer);
+            // Using a static keys holder
+            E_HolderResult res = simpleComponentHolder.HolderTryGetComponent(ComponentsKeys.Renderer, out SpriteRenderer renderer);
 
             if (res != E_HolderResult.Success) return;
             if (renderer.color == Color.white)
@@ -21,7 +24,7 @@ namespace StdNounou.Samples.HolderComponent
 
         public void TryAddForce()
         {
-            E_HolderResult res = componentHolder.HolderTryGetComponent(E_ComponentTypes.Rigibody, out Rigidbody2D body);
+            E_HolderResult res = simpleComponentHolder.HolderTryGetComponent(ComponentsKeys.Rigidbody, out Rigidbody2D body);
 
             if (res != E_HolderResult.Success) return;
             body.AddForce(Vector2.up * 10);
@@ -29,10 +32,10 @@ namespace StdNounou.Samples.HolderComponent
 
         public void TryPlayAudio()
         {
-            E_HolderResult res = componentHolder.HolderTryGetComponent(E_ComponentTypes.AudioPlayer, out AudioSource source);
+            E_HolderResult res = enumComponentHolder.HolderTryGetComponent(E_ComponentsKeys.AudioPlayer, out AudioSource source);
 
             if (res != E_HolderResult.Success) return;
             source.PlayOneShot(audiosToPlay.RandomElement());
         }
-    } 
+    }
 }

@@ -1,7 +1,7 @@
 
 namespace StdNounou.Core
 {
-    public enum E_ComponentTypes
+    public enum CompKey
     {
         Renderer,
         Rigibody,

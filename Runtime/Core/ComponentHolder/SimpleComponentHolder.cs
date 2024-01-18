@@ -2,45 +2,27 @@ using AYellowpaper.SerializedCollections;
 using System;
 using UnityEngine;
 
-namespace StdNounou.Core
+namespace StdNounou.Core.ComponentsHolder
 {
-    public class SimpleComponentHolder : MonoBehaviour, IComponentHolderBase<E_ComponentTypes>
+    public class SimpleComponentHolder : MonoBehaviour, IComponentHolder_Core<string>
     {
-        [field: SerializeField] public SerializedDictionary<E_ComponentTypes, Component> CreatureComponents {  get; private set; }
+        [field: SerializeField] public SerializedDictionary<string, Component> Components {  get; private set; }
 
-        public event Action<ComponentChangeEventArgs<E_ComponentTypes>> OnComponentModified;
+        public event Action<ComponentChangeEventArgs<string>> OnComponentModified;
 
-        public ExpectedType HolderGetComponent<ExpectedType>(E_ComponentTypes component) where ExpectedType : Component
+        public ExpectedType HolderGetComponent<ExpectedType>(string component) where ExpectedType : Component
         {
-            return CreatureComponents[component] as ExpectedType;
+            return this.HolderGetComponent<string, ExpectedType>(Components, component);
         }
 
-        public E_HolderResult HolderTryGetComponent<ExpectedType>(E_ComponentTypes component, out ExpectedType result) where ExpectedType : Component
+        public E_HolderResult HolderTryGetComponent<ExpectedType>(string component, out ExpectedType result) where ExpectedType : Component
         {
-            result = null;
-            if (!CreatureComponents.TryGetValue(component, out Component brutResult))
-            {
-                this.LogError(E_HolderResult.ComponentNotFound, component);
-                return E_HolderResult.ComponentNotFound;
-            }
-            if (brutResult.GetType() != typeof(ExpectedType))
-            {
-                this.LogError(E_HolderResult.TypeUnmatch, component);
-                return E_HolderResult.TypeUnmatch;
-            }
-
-            result = brutResult as ExpectedType;
-            return E_HolderResult.Success;
+            return this.HolderTryGetComponent(component, Components, out result);
         }
 
-        public void HolderChangeComponent<ExpectedType>(E_ComponentTypes componentType, ExpectedType component) where ExpectedType : Component
+        public void HolderChangeComponent<ExpectedType>(string componentType, ExpectedType component) where ExpectedType : Component
         {
-            if (!CreatureComponents.ContainsKey(componentType))
-                CreatureComponents.Add(componentType, component);
-            else
-                CreatureComponents[componentType] = component;
-
-            OnComponentModified?.Invoke(new ComponentChangeEventArgs<E_ComponentTypes>(componentType, component));
+            this.HolderChangeComponent(Components, componentType, component, OnComponentModified);
         }
     }
 }

@@ -778,6 +778,7 @@ GameObject:
   - component: {fileID: 1206679089}
   - component: {fileID: 1206679091}
   - component: {fileID: 1206679090}
+  - component: {fileID: 1206679092}
   m_Layer: 0
   m_Name: Creature
   m_TagString: Untagged
@@ -814,14 +815,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b234dea95f9416f489bccf56a0310397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CreatureComponents>k__BackingField:
+  <Components>k__BackingField:
     _serializedList:
-    - Key: 0
-      Value: {fileID: 399680847}
-    - Key: 1
+    - Key: Rigidbody
       Value: {fileID: 399680848}
-    - Key: 2
-      Value: {fileID: 897866713}
+    - Key: Renderer
+      Value: {fileID: 399680847}
 --- !u!114 &1206679091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -834,11 +833,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63fd1686fb905ab4e87b737c4a464cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  componentHolder: {fileID: 1206679090}
+  simpleComponentHolder: {fileID: 1206679090}
+  enumComponentHolder: {fileID: 1206679092}
   audiosToPlay:
   - {fileID: 8300000, guid: b2ce89dba66b2ee4cbf30680b404efa7, type: 3}
   - {fileID: 8300000, guid: cc0e60eb4859cc54a8dc95d4e4eb3cd2, type: 3}
   - {fileID: 8300000, guid: 6c21539680da3b94694cba1620db8e75, type: 3}
+--- !u!114 &1206679092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206679088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ce9e46f1445c204a8f32dab9a07c115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Components>k__BackingField:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: 897866713}
 --- !u!1 &1328990599
 GameObject:
   m_ObjectHideFlags: 0
