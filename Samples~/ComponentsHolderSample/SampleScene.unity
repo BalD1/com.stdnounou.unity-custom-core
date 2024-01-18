@@ -430,7 +430,7 @@ RectTransform:
   m_Children:
   - {fileID: 1328990600}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -503,7 +503,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &897866711
 GameObject:
@@ -778,6 +778,7 @@ GameObject:
   - component: {fileID: 1206679089}
   - component: {fileID: 1206679091}
   - component: {fileID: 1206679090}
+  - component: {fileID: 1206679093}
   - component: {fileID: 1206679092}
   m_Layer: 0
   m_Name: Creature
@@ -801,7 +802,7 @@ Transform:
   - {fileID: 399680846}
   - {fileID: 897866712}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1206679090
 MonoBehaviour:
@@ -817,8 +818,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Components>k__BackingField:
     _serializedList:
-    - Key: Rigidbody
-      Value: {fileID: 399680848}
     - Key: Renderer
       Value: {fileID: 399680847}
 --- !u!114 &1206679091
@@ -834,6 +833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simpleComponentHolder: {fileID: 1206679090}
+  keyComponentHolder: {fileID: 1206679093}
   enumComponentHolder: {fileID: 1206679092}
   audiosToPlay:
   - {fileID: 8300000, guid: b2ce89dba66b2ee4cbf30680b404efa7, type: 3}
@@ -848,13 +848,75 @@ MonoBehaviour:
   m_GameObject: {fileID: 1206679088}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ce9e46f1445c204a8f32dab9a07c115, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d69ca38295b4e4b8bd90d3cde20e0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <Components>k__BackingField:
     _serializedList:
     - Key: 0
       Value: {fileID: 897866713}
+--- !u!114 &1206679093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206679088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98164e2a18e8c4a468e2a32f6c61c79f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Components>k__BackingField:
+    _serializedList:
+    - Key: {fileID: 11400000, guid: 9e572c9e4e901fb4da85ddbc795b7380, type: 2}
+      Value: {fileID: 399680848}
+--- !u!1 &1250470782
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1250470784}
+  - component: {fileID: 1250470783}
+  m_Layer: 0
+  m_Name: KeysHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1250470783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250470782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8a9b4b9e09edf4438bd983a8bca4ae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dependecies: []
+  <RigidBody>k__BackingField: {fileID: 11400000, guid: 9e572c9e4e901fb4da85ddbc795b7380, type: 2}
+--- !u!4 &1250470784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250470782}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1328990599
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,7 +1279,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1676977039
 GameObject:

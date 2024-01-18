@@ -17,7 +17,8 @@ namespace StdNounou.Core
                 T[] objs = FindObjectOfType(typeof(T)) as T[];
                 if (objs == null)
                 {
-                    CustomLogger.Log(typeof(T), "There is none " + typeof(T) + " singleton found.", CustomLogger.E_LogType.Error);
+                    //CustomLogger.Log(typeof(T), "There is none " + typeof(T) + " singleton found.", CustomLogger.E_LogType.Error);
+                    CreateInstance();
                     return null;
                 }
                 if (objs.Length > 0) instance = objs[0];
@@ -83,6 +84,12 @@ namespace StdNounou.Core
         {
             this.Log("Should not be using GetInstances on Singleton. Use GetInstance instead.", CustomLogger.E_LogType.Warning);
             return new List<GameObject>(GetInstances());
+        }
+
+        protected static void CreateInstance()
+        {
+            GameObject newInstance = new GameObject(typeof(T).ToString());
+            newInstance.AddComponent<T>();
         }
     } 
 }

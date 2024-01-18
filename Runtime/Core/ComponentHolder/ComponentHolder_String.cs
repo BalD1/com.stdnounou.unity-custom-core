@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace StdNounou.Core.ComponentsHolder
 {
-    public class SimpleComponentHolder : MonoBehaviour, IComponentHolder_Core<string>
+    public class ComponentHolder_String : MonoBehaviour, IComponentHolder_Core<string>
     {
         [field: SerializeField] public SerializedDictionary<string, Component> Components {  get; private set; }
 

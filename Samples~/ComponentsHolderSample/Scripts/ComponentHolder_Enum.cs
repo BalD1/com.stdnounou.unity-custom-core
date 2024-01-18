@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace StdNounou.Samples.HolderComponent
 {
-    public class EnumComponentsHolder : MonoBehaviour, IComponentHolder_Core<E_ComponentsKeys>
+    public class ComponentHolder_Enum : MonoBehaviour, IComponentHolder_Core<E_ComponentsKeys>
     {
         [field: SerializeField] public SerializedDictionary<E_ComponentsKeys, Component> Components { get; private set; }
 
