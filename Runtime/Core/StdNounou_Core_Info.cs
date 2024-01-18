@@ -1,4 +1,7 @@
-public static class StdNounou_Core_Info
+namespace StdNounou.Core
 {
-    public const string VERSION = "1.1.0";
+	public static class StdNounou_Core_Info
+	{
+		public const string VERSION = "1.1.0";
+	} 
 }
