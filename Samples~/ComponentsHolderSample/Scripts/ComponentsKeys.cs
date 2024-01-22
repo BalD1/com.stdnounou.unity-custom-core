@@ -1,5 +1,5 @@
 
-namespace StdNounou.Samples.HolderComponent
+namespace StdNounou.Core.Samples
 {
     public static class ComponentsKeys
     {

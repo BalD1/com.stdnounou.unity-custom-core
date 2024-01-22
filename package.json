@@ -1,6 +1,6 @@
 {
   "name": "com.stdnounou.unity-custom-core",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "displayName": "StdNounou Custom Core",
   "description": "This is our own personal unity core functionalities.",
   "unity": "2021.3",
@@ -10,11 +10,16 @@
     "email": "florianhusson1@gmail.com",
     "url": "https://fh-portfolio-d3d69c.webflow.io"
   },
-  "samples" : [
-  {
-	  "displayName": "Sample Scene",
-	  "description": "Scene showing how to use ComponentHolder",
-	  "path": "Samples~/ComponentsHolderSample"
-  }
+  "dependecies": [
+    {
+      "com.unity.addressables": "1.19.19"
+    }
+  ],
+  "samples": [
+    {
+      "displayName": "Sample Scene",
+      "description": "Scene showing how to use ComponentHolder",
+      "path": "Samples~/ComponentsHolderSample"
+    }
   ]
 }

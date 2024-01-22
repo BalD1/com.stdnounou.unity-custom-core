@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Text;
+using TMPro;
 using UnityEngine;
 
 namespace StdNounou.Core
@@ -52,7 +53,7 @@ namespace StdNounou.Core
             StringBuilder finalMessage = new StringBuilder();
             finalMessage.Append(atLine)
                         .Append($"[<color=#{color}><b>{scriptType}</b></color>")
-                        .Append(isManager ? "]" : $", <b>{sender.gameObject.name}</b>]")
+                        .Append(isManager || sender == null ? "]" : $", <b>{sender.gameObject.name}</b>]")
                         .Append(" : ")
                         .Append(message);
             switch (logType)

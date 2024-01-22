@@ -1,8 +1,9 @@
 using AYellowpaper.SerializedCollections;
+using StdNounou.Core.ComponentsHolder;
 using System;
 using UnityEngine;
 
-namespace StdNounou.Core.ComponentsHolder
+namespace StdNounou.Core.Samples
 {
     public class ComponentHolder_Key : MonoBehaviour, IComponentHolder_Core<SO_KeyContainer>
     {

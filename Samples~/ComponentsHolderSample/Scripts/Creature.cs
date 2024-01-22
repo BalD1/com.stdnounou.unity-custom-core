@@ -1,8 +1,7 @@
-using StdNounou.Core;
 using StdNounou.Core.ComponentsHolder;
 using UnityEngine;
 
-namespace StdNounou.Samples.HolderComponent
+namespace StdNounou.Core.Samples
 {
     [RequireComponent(typeof(ComponentHolder_String), typeof(ComponentHolder_Key), typeof(ComponentHolder_Enum))]
 	public class Creature : MonoBehaviour

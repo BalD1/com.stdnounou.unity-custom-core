@@ -3,7 +3,7 @@ using StdNounou.Core.ComponentsHolder;
 using System;
 using UnityEngine;
 
-namespace StdNounou.Samples.HolderComponent
+namespace StdNounou.Core.Samples
 {
     public class ComponentHolder_Enum : MonoBehaviour, IComponentHolder_Core<E_ComponentsKeys>
     {

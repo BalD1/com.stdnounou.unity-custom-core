@@ -1,8 +1,7 @@
 using StdNounou.Core.ComponentsHolder;
-using StdNounou.Core;
 using UnityEngine;
 
-namespace StdNounou.Samples.HolderComponent
+namespace StdNounou.Core.Samples
 {
     public class KeysHolder : Singleton<KeysHolder>
     {
