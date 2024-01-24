@@ -16,7 +16,8 @@ namespace StdNounou.Core.Editor
             sb.Append("        Rigidbody,\n");
             sb.Append("        AudioPlayer,\n");
             sb.Append("        Renderer,\n");
-            sb.Append("        HealthSystem\n");
+            sb.Append("        HealthSystem,\n");
+            sb.Append("        StatsHandler\n");
             sb.Append("    }\n");
             sb.Append("}");
 
