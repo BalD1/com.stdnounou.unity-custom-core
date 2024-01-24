@@ -15,6 +15,6 @@ namespace StdNounou.Core
 
         [field: SerializeField, Range(0, 100)] public float AlphaFadeLifetimeStart { get; private set; } = 50;
 
-        [field: SerializeField] public SO_TMPData TMPData { get; private set; }
+        [field: SerializeField] public SO_TextPopupPrefab TMPPrefab { get; private set; }
     }
 }

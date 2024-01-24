@@ -6,7 +6,7 @@ namespace StdNounou.Core.ComponentsHolder
 {
 	public static class ComponentHolderExtensions
 	{
-		public static void LogError<CompKey>(this IComponentHolder_Core<CompKey> holder, E_HolderResult result, CompKey compType)
+		public static void LogError(this IComponentHolder holder, E_HolderResult result, E_ComponentsKeys compType)
         {
 			switch (result)
 			{
@@ -20,7 +20,7 @@ namespace StdNounou.Core.ComponentsHolder
             }
 		}
 
-        public static E_HolderResult HolderTryGetComponent<ComponentsKeys, ExpectedType>(this IComponentHolder_Core<ComponentsKeys> holder, ComponentsKeys component, SerializedDictionary<ComponentsKeys, Component> holderDictionnary, out ExpectedType result)
+        public static E_HolderResult HolderTryGetComponent<ExpectedType>(this IComponentHolder holder, SerializedDictionary<E_ComponentsKeys, Component> holderDictionnary, E_ComponentsKeys component, out ExpectedType result)
                                                                      where ExpectedType : Component
         {
             result = null;
@@ -31,6 +31,11 @@ namespace StdNounou.Core.ComponentsHolder
             }
             if (brutResult.GetType() != typeof(ExpectedType))
             {
+                if (brutResult.TryGetComponent(out result))
+                {
+                    holder.LogError($"Component of type {component} was found in {brutResult}, but {brutResult} was not the direct result. Ensure that the object set in holder is the component, not the GameObject.");
+                    return E_HolderResult.Success;
+                }
                 holder.LogError(E_HolderResult.TypeUnmatch, component);
                 return E_HolderResult.TypeUnmatch;
             }
@@ -39,13 +44,13 @@ namespace StdNounou.Core.ComponentsHolder
             return E_HolderResult.Success;
         }
 
-        public static ExpectedType HolderGetComponent<ComponentsKeys, ExpectedType>(this IComponentHolder_Core<ComponentsKeys> holder, SerializedDictionary<ComponentsKeys, Component> holderDictionnary, ComponentsKeys component) 
+        public static ExpectedType HolderGetComponent<ExpectedType>(this IComponentHolder holder, SerializedDictionary<E_ComponentsKeys, Component> holderDictionnary, E_ComponentsKeys component) 
                                                                 where ExpectedType : Component
         {
             return holderDictionnary[component] as ExpectedType;
         }
 
-        public static void HolderChangeComponent<ComponentsKeys, ExpectedType>(this IComponentHolder_Core<ComponentsKeys> holder, SerializedDictionary<ComponentsKeys, Component> holderDictionnary, ComponentsKeys componentType, ExpectedType component, Action<ComponentChangeEventArgs<ComponentsKeys>> onChangeAction) 
+        public static void HolderChangeComponent<ExpectedType>(this IComponentHolder holder, SerializedDictionary<E_ComponentsKeys, Component> holderDictionnary, E_ComponentsKeys componentType, ExpectedType component, Action<ComponentChangeEventArgs> onChangeAction) 
                                                            where ExpectedType : Component
         {
             if (!holderDictionnary.ContainsKey(componentType))
@@ -53,7 +58,7 @@ namespace StdNounou.Core.ComponentsHolder
             else
                 holderDictionnary[componentType] = component;
 
-            onChangeAction?.Invoke(new ComponentChangeEventArgs<ComponentsKeys>(componentType, component));
+            onChangeAction?.Invoke(new ComponentChangeEventArgs(componentType, component));
         }
     }
 }

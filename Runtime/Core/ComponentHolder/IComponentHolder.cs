@@ -3,18 +3,18 @@ using UnityEngine;
 
 namespace StdNounou.Core.ComponentsHolder
 {
-    public interface IComponentHolder_Core<CompKey>
+    public interface IComponentHolder
     {
-        public ExpectedType HolderGetComponent<ExpectedType>(CompKey component)
+        public ExpectedType HolderGetComponent<ExpectedType>(E_ComponentsKeys component)
                                          where ExpectedType : Component;
 
-        public E_HolderResult HolderTryGetComponent<ExpectedType>(CompKey component, out ExpectedType result)
+        public E_HolderResult HolderTryGetComponent<ExpectedType>(E_ComponentsKeys component, out ExpectedType result)
                                               where ExpectedType : Component;
 
-        public void HolderChangeComponent<ExpectedType>(CompKey componentType, ExpectedType component)
+        public void HolderChangeComponent<ExpectedType>(E_ComponentsKeys componentType, ExpectedType component)
                                     where ExpectedType : Component;
 
-        public event Action<ComponentChangeEventArgs<CompKey>> OnComponentModified;
+        public event Action<ComponentChangeEventArgs> OnComponentModified;
     }
 
     public enum E_HolderResult
@@ -24,12 +24,12 @@ namespace StdNounou.Core.ComponentsHolder
         TypeUnmatch
     }
 
-    public class ComponentChangeEventArgs<CompKey> : EventArgs
+    public class ComponentChangeEventArgs : EventArgs
     {
-        public CompKey ComponentType { get; private set; }
+        public E_ComponentsKeys ComponentType { get; private set; }
         public Component NewComponent { get; private set; }
 
-        public ComponentChangeEventArgs(CompKey componentType, Component newComponent)
+        public ComponentChangeEventArgs(E_ComponentsKeys componentType, Component newComponent)
         {
             ComponentType = componentType;
             NewComponent = newComponent;

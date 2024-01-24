@@ -19,4 +19,4 @@ MonoBehaviour:
   <TextColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
   <Scale>k__BackingField: {x: 1, y: 1}
   <AlphaFadeLifetimeStart>k__BackingField: 50
-  <TMPData>k__BackingField: {fileID: 11400000, guid: 8b44de63c3463404d930203d9860111a, type: 2}
+  <TMPPrefab>k__BackingField: {fileID: 11400000, guid: 74ebbf71af686334abde841dc1dbb6ab, type: 2}

@@ -22,10 +22,11 @@ namespace StdNounou.Core
         private Vector3 targetPosition;
         private int listIndex = 1;
 
+        private SO_TextPopupPrefab pf;
+
         private static int layerIndex = 0;
 
-        private static ObjectPool<TextPopup> pool;
-        private static TextPopup TextPopup_PF;
+        private static Dictionary<string, ObjectPool<TextPopup>> pools;
 
         private void Reset()
         {
@@ -34,37 +35,17 @@ namespace StdNounou.Core
 
         public static TextPopup Create(string text, Vector2 pos, SO_TextPopupData textPopupData, Transform parent = null)
         {
-            if (pool == null)
+            if (pools == null) pools = new Dictionary<string, ObjectPool<TextPopup>>();
+            if (!pools.TryGetValue(textPopupData.TMPPrefab.ID, out ObjectPool<TextPopup> pool))
             {
-                if (TextPopup_PF == null)
-                {
-                    CustomLogger.LogError(typeof(TextPopup), "TextPopupPF was null. Please ensure the prefab was set by calling \"SetPrefab\" before trying to create a new TextPopup.");
-                    return null;
-                }
-                pool = new ObjectPool<TextPopup>(
-                        _createAction: () => TextPopup_PF.Create(pos),
-                        _parentContainer: parent
-                        );
+                pool = new ObjectPool<TextPopup>(_createAction: () => textPopupData.TMPPrefab.PopupPrefab.Create(),
+                                                 _parentContainer: null);
+                pools.Add(textPopupData.TMPPrefab.ID, pool);
             }
 
             TextPopup next = pool.GetNext(pos);
             next.Setup(text, textPopupData, parent);
             return next;
-        }
-
-        public static void SetPrefab(TextPopup popupPF)
-        {
-            TextPopup_PF = popupPF;
-        }
-        public static void SetPrefab(GameObject popupPF)
-        {
-            TextPopup tp = popupPF.GetComponent<TextPopup>();
-            if (tp == null)
-            {
-                CustomLogger.LogError(typeof(TextPopup), "No TextPopup script was found on the given prefab.");
-                return;
-            }
-            TextPopup_PF = tp;
         }
 
         private void Update()
@@ -100,7 +81,7 @@ namespace StdNounou.Core
 
         public void Setup(string text, SO_TextPopupData textPopupData, Transform parent, int listIndex = 1)
         {
-            TrySetTMPOptions(textPopupData);
+            this.pf = textPopupData.TMPPrefab;
 
             this.listIndex = listIndex;
             textMesh.alpha = 1;
@@ -116,12 +97,6 @@ namespace StdNounou.Core
             this.transform.localScale = textPopupData.Scale;
         }
 
-        private void TrySetTMPOptions(SO_TextPopupData data)
-        {
-            if (this.textPopupData == data) return;
-            this.textMesh.SetData(data.TMPData);
-        }
-
         public void SetListIndex(int index)
             => this.listIndex = index;
 
@@ -129,6 +104,7 @@ namespace StdNounou.Core
         {
             layerIndex--;
             OnEnd?.Invoke(this);
+            pools.TryGetValue(pf.ID, out ObjectPool<TextPopup> pool);
             pool.Enqueue(this);
         }
 

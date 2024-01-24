@@ -3,25 +3,21 @@ using UnityEngine;
 
 namespace StdNounou.Core.Samples
 {
-    [RequireComponent(typeof(ComponentHolder_String), typeof(ComponentHolder_Key), typeof(ComponentHolder_Enum))]
+    [RequireComponent(typeof(BaseComponentHolder))]
 	public class Creature : MonoBehaviour
 	{
-		[SerializeField] private ComponentHolder_String simpleComponentHolder;
-        [SerializeField] private ComponentHolder_Key keyComponentHolder;
-		[SerializeField] private ComponentHolder_Enum enumComponentHolder;
         [SerializeField] private AudioClip[] audiosToPlay;
+        [SerializeField] private BaseComponentHolder baseComponentHolder;
 
         private void Reset()
         {
-            simpleComponentHolder = this.GetComponent<ComponentHolder_String>();
-            keyComponentHolder = this.GetComponent<ComponentHolder_Key>();
-            enumComponentHolder = this.GetComponent<ComponentHolder_Enum>();
+            baseComponentHolder = this.GetComponent<BaseComponentHolder>();
         }
 
         public void TryChangeRendererColor()
         {
             // Using a static keys holder
-            E_HolderResult res = simpleComponentHolder.HolderTryGetComponent(ComponentsKeys.Renderer, out SpriteRenderer renderer);
+            E_HolderResult res = baseComponentHolder.HolderTryGetComponent(E_ComponentsKeys.Renderer, out SpriteRenderer renderer);
 
             if (res != E_HolderResult.Success) return;
             if (renderer.color == Color.white)
@@ -32,7 +28,7 @@ namespace StdNounou.Core.Samples
 
         public void TryAddForce()
         {
-            E_HolderResult res = keyComponentHolder.HolderTryGetComponent(KeysHolder.GetRigidBody, out Rigidbody2D body);
+            E_HolderResult res = baseComponentHolder.HolderTryGetComponent(E_ComponentsKeys.Rigidbody, out Rigidbody2D body);
 
             if (res != E_HolderResult.Success) return;
             body.AddForce(Vector2.up * 10);
@@ -40,7 +36,7 @@ namespace StdNounou.Core.Samples
 
         public void TryPlayAudio()
         {
-            E_HolderResult res = enumComponentHolder.HolderTryGetComponent(E_ComponentsKeys.AudioPlayer, out AudioSource source);
+            E_HolderResult res = baseComponentHolder.HolderTryGetComponent(E_ComponentsKeys.AudioPlayer, out AudioSource source);
 
             if (res != E_HolderResult.Success) return;
             source.PlayOneShot(audiosToPlay.RandomElement());

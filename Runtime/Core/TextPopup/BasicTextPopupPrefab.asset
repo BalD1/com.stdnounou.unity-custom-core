@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6125b83c39e9c6347bfb9a4463c75280, type: 3}
-  m_Name: RIGIDBODY
+  m_Script: {fileID: 11500000, guid: bb1590d808ed9ca40a0d39ab1c3e8d0e, type: 3}
+  m_Name: BasicTextPopupPrefab
   m_EditorClassIdentifier: 
-  <Key>k__BackingField: Rigidbody
+  <ID>k__BackingField: Basic
+  <PopupPrefab>k__BackingField: {fileID: 1311466795702261959, guid: 0a498c08ceaa0da47a53d1b2cb55de2a, type: 3}
