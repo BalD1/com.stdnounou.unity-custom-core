@@ -1,10 +1,7 @@
 using StdNounou.Core.Editor;
 using System;
 using TMPro;
-using UnityEngine.AddressableAssets;
 using UnityEngine;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 
 namespace StdNounou.Core
