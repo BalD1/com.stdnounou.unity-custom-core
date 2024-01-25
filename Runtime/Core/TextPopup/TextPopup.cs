@@ -1,4 +1,3 @@
-using StdNounou.Core.Editor;
 using System;
 using TMPro;
 using UnityEngine;
@@ -11,8 +10,8 @@ namespace StdNounou.Core
     {
         [SerializeField] private TextMeshPro textMesh;
 
-        [SerializeField, ReadOnly] private float currentLifetime;
-        [SerializeField, ReadOnly] private SO_TextPopupData textPopupData;
+        private float currentLifetime;
+        private SO_TextPopupData textPopupData;
 
         public event Action<TextPopup> OnEnd;
 

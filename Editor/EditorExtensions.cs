@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 
 namespace StdNounou.Core.Editor
@@ -8,5 +9,7 @@ namespace StdNounou.Core.Editor
         {
             return obj.FindProperty(string.Format("<{0}>k__BackingField", propName));
         }
-    } 
+    }
 }
+
+#endif
