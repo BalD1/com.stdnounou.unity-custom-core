@@ -9,15 +9,19 @@ namespace StdNounou.Core.Editor
         {
             path = path.Replace(".meta", "");
             int index = path.LastIndexOf(".");
-            string file = path.Substring(index);
-            if (file != ".cs" && file != ".js" && file != ".boo") return;
+            string fileExtension = path.Substring(index);
+            if (fileExtension != ".cs" && fileExtension != ".js" && fileExtension != ".boo") return;
             index = Application.dataPath.LastIndexOf("Assets");
             path = Application.dataPath.Substring(0, index) + path;
-            file = System.IO.File.ReadAllText(path);
+            fileExtension = System.IO.File.ReadAllText(path);
 
-            file = file.Replace("#EDITORSCRIPTNAME#", path.Replace("ED_", ""));
+            int fileNameIdx = path.LastIndexOf('/');
+            string fileName = path.Substring(fileNameIdx + 1);
+            fileName = fileName.Replace(".cs", "");
 
-            System.IO.File.WriteAllText(path, file);
+            fileExtension = fileExtension.Replace("#EDITORSCRIPTNAME#", fileName.Replace("ED_", ""));
+
+            System.IO.File.WriteAllText(path, fileExtension);
             AssetDatabase.Refresh();
         }
     }

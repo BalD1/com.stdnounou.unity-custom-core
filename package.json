@@ -1,6 +1,6 @@
 {
   "name": "com.stdnounou.unity-custom-core",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "displayName": "StdNounou Custom Core",
   "description": "This is our own personal unity core functionalities.",
   "unity": "2021.3",
