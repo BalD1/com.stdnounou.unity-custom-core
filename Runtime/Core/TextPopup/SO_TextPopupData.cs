@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace StdNounou.Core
 {
-    [CreateAssetMenu(fileName = "New TextPopupData", menuName = "StdNounou/Scriptables/FX/TextData")]
+    [CreateAssetMenu(fileName = "New TextPopupData", menuName = "StdNounou/Scriptables/FX/TextData", order = 110)]
     public class SO_TextPopupData : ScriptableObject
     {
         [field: SerializeField] public float TravelSpeed { get; private set; } = 5;

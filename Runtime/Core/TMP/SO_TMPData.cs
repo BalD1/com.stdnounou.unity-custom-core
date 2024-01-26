@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace StdNounou.Core
 {
-    [CreateAssetMenu(fileName = "New TextPopupData", menuName = "StdNounou/Scriptables/TMP/Data")]
+    [CreateAssetMenu(fileName = "New TextPopupData", menuName = "StdNounou/Scriptables/TMP/Data", order = 110)]
 	public class SO_TMPData : ScriptableObject
     {
         [field: SerializeField] public TMP_FontAsset Font { get; private set; }

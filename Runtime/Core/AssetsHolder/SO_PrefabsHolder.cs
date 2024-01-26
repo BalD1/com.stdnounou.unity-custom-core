@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace StdNounou.Core
 {
-    [CreateAssetMenu(fileName = "New Prefabs Holder", menuName = "Scriptable/Assets Holders/Prefabs")]
+    [CreateAssetMenu(fileName = "New Prefabs Holder", menuName = "StdNounou/Scriptables/Assets Holders/Prefabs", order = 200)]
     public class SO_PrefabsHolder : SO_AssetsHolder<GameObject>
     {
         public GameObject CreateNewGameObject(string id, bool asPrefab = false)
