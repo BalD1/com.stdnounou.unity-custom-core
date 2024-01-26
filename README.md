@@ -42,5 +42,5 @@ namespace StdNounou.Core
 
 # __DEPENDECIES__ :
 
--Ayellowpaper's Serialized Dictionary: https://github.com/ayellowpaper/SerializedDictionary.git
--Leantween : https://github.com/AlgorithmJuice/LeanTween.git
+- Ayellowpaper's Serialized Dictionary: https://github.com/ayellowpaper/SerializedDictionary.git
+- Leantween : https://github.com/AlgorithmJuice/LeanTween.git
