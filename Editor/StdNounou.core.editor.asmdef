@@ -1,6 +1,6 @@
 {
     "name": "stdnounou.core.editor",
-    "rootNamespace": "",
+    "rootNamespace": "StdNounou.Core.Editor",
     "references": [],
     "includePlatforms": [
         "Editor"
