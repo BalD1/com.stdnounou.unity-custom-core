@@ -17,12 +17,11 @@ namespace StdNounou.Core
                 T[] objs = FindObjectOfType(typeof(T)) as T[];
                 if (objs == null)
                 {
-                    //CustomLogger.Log(typeof(T), "There is none " + typeof(T) + " singleton found.", CustomLogger.E_LogType.Error);
-                    CreateInstance();
-                    return null;
+                    CustomLogger.LogError(typeof(T), "There is none " + typeof(T) + " singleton found. Will create one now.");
+                    return CreateInstance();
                 }
                 if (objs.Length > 0) instance = objs[0];
-                if (objs.Length > 1) CustomLogger.Log(typeof(T), "There is more than one " + typeof(T) + " object.", CustomLogger.E_LogType.Error);
+                if (objs.Length > 1) CustomLogger.LogError(typeof(T), "There is more than one " + typeof(T) + " object.");
 
                 return instance;
             }
@@ -53,6 +52,7 @@ namespace StdNounou.Core
 
         private void CheckDependencies()
         {
+            if (dependecies == null) return;
             foreach (var item in dependecies)
             {
                 if (!(item.GetComponent<IDependency>()).InstanceExists())
@@ -86,10 +86,10 @@ namespace StdNounou.Core
             return new List<GameObject>(GetInstances());
         }
 
-        protected static void CreateInstance()
+        protected static T CreateInstance()
         {
             GameObject newInstance = new GameObject(typeof(T).ToString());
-            newInstance.AddComponent<T>();
+            return newInstance.AddComponent<T>();
         }
     } 
 }

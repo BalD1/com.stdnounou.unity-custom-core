@@ -7,8 +7,11 @@ namespace StdNounou.Core.Editor
     {
         public static void OnWillCreateAsset(string path)
         {
+            if (path == "") return;
             path = path.Replace(".meta", "");
             int index = path.LastIndexOf(".");
+            if (index == -1) return;
+            if (index >= path.Length) return;
             string fileExtension = path.Substring(index);
             if (fileExtension != ".cs" && fileExtension != ".js" && fileExtension != ".boo") return;
             index = Application.dataPath.LastIndexOf("Assets");
