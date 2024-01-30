@@ -8,14 +8,14 @@ namespace StdNounou.Core
     {
         [SerializeField] private List<string> scenesToBoot;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             if (scenesToBoot == null || scenesToBoot.Count == 0) 
             {
                 this.LogError("Not scenes to load where given in list.");
                 return;
             }
-            ScenesHandler.Instance.LoadSceneAsync(scenesToBoot, true);
+            ScenesHandler.Instance.LoadSceneAsync(scenesToBoot, false, false);
         }
     }
 }
