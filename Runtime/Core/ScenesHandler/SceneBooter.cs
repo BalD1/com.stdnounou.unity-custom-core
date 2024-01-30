@@ -6,24 +6,16 @@ namespace StdNounou.Core
 {
     public class SceneBooter : MonoBehaviour
     {
-        public List<string> scenes;
+        [SerializeField] private List<string> scenesToBoot;
 
         private void Awake()
         {
-            //ScenesHandler.Instance.LoadSceneAsync(scenes, true);
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space)) 
+            if (scenesToBoot == null || scenesToBoot.Count == 0) 
             {
-                ScenesHandler.Instance.AddSceneAsync("Sub1", true, true);
+                this.LogError("Not scenes to load where given in list.");
+                return;
             }
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                ScenesHandler.Instance.RemoveSceneAsync("Sub1", true, true);
-            }
-
+            ScenesHandler.Instance.LoadSceneAsync(scenesToBoot, true);
         }
     }
 }
