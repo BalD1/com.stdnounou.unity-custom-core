@@ -11,11 +11,13 @@ namespace StdNounou.Core
         protected override void EventsSubscriber()
         {
             ScenesHandlerEvents.OnFinishedLoadScene += OnLoadingCompleted;
+            ScenesHandlerEvents.OnFinishedUnloadScene += OnLoadingCompleted;
         }
 
         protected override void EventsUnSubscriber()
         {
-            ScenesHandlerEvents.OnFinishedLoadScene += OnLoadingCompleted;
+            ScenesHandlerEvents.OnFinishedLoadScene -= OnLoadingCompleted;
+            ScenesHandlerEvents.OnFinishedUnloadScene -= OnLoadingCompleted;
         }
 
         protected override void Awake()
@@ -24,7 +26,7 @@ namespace StdNounou.Core
             SetScreensState(true);
         }
 
-        public void OnLoadingCompleted(Scene scene)
+        public void OnLoadingCompleted(Scene[] scenes)
         {
             SetScreensState(false);
         }

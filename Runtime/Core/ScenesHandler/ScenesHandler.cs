@@ -9,13 +9,11 @@ namespace StdNounou.Core
     {
         [SerializeField] private string loadingScreenName = "LoadingScene";
 
-        [SerializeField] private string currentMainScene;
-        [SerializeField] private List<string> currentSubScenes = new List<string>();
+        [SerializeField] private List<string> loadedScenes = new List<string>();
 
-        private Coroutine loadingCor;
+        private Coroutine currentCor;
 
         private bool isLoading;
-        private bool waitForInput;
 
         protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
@@ -25,44 +23,135 @@ namespace StdNounou.Core
         {
         }
 
-        public void LoadSceneAsync(string sceneName, bool waitForInput, bool showLoadingScreen = true)
+        public void LoadSceneAsync(string sceneName, bool showLoadingScreen = true, bool waitForInput = true)
         {
-            if (loadingCor != null) return;
-            this.waitForInput = waitForInput;
+            LoadSceneAsync(new List<string>() { sceneName }, showLoadingScreen, waitForInput);
+        }
+        public void LoadSceneAsync(List<string> subScenes, bool showLoadingScreen = true, bool waitForInput = true)
+        {
+            if (currentCor != null) return;
             isLoading = true;
 
-            loadingCor = StartCoroutine(LoadScene(sceneName));
+            currentCor = StartCoroutine(LoadScene(subScenes, showLoadingScreen, waitForInput));
         }
 
-        private IEnumerator LoadScene(string sceneName, bool showLoadingScreen = true)
+        public void AddSceneAsync(string sceneName, bool showLoadingScreen = true, bool waitForInput = true)
+        {
+            AddSceneAsync(new List<string> { sceneName }, showLoadingScreen, waitForInput);
+        }
+        public void AddSceneAsync(List<string> scenesNames, bool showLoadingScreen = true, bool waitForInput = true)
+        {
+            if (currentCor != null) return;
+            isLoading = true;
+
+            currentCor = StartCoroutine(LoadScene(scenesNames, showLoadingScreen, waitForInput, LoadSceneMode.Additive, LoadSceneMode.Additive));
+        }
+
+        private IEnumerator LoadScene(List<string> scenesNames, bool showLoadingScreen = true, bool waitForInput = true, LoadSceneMode firstSceneLoadMode = LoadSceneMode.Single, LoadSceneMode loadingSceneLoadMode = LoadSceneMode.Single)
         {
             yield return new WaitForSeconds(.05f);
 
-            AsyncOperation op = SceneManager.LoadSceneAsync(loadingScreenName);
-            while (op.progress < .9f) yield return null;
-
-            Scene scene = SceneManager.GetSceneByName(sceneName);
-
-            op = SceneManager.LoadSceneAsync(sceneName);
-            op.allowSceneActivation = false;
-            this.StartedLoadScene(scene);
-
-            while(!op.isDone)
+            AsyncOperation[] ops = new AsyncOperation[scenesNames.Count];
+            if (showLoadingScreen)
             {
-                if (op.progress >= .9f)
-                {
-                    op.allowSceneActivation = (!waitForInput) || (waitForInput && Input.anyKeyDown);
-                    if (isLoading)
-                    {
-                        currentMainScene = sceneName;
-
-                        isLoading = false;
-                        this.FinishedLoadScene(scene);
-                    }
-                }
-
-                yield return null;
+                AsyncOperation loadingOP = SceneManager.LoadSceneAsync(loadingScreenName, loadingSceneLoadMode);
+                while (loadingOP.progress < .9f) yield return null;
             }
+
+            Scene[] scenes = new Scene[scenesNames.Count];
+
+            for (int i = 0; i < scenesNames.Count; i++)
+            {
+                string sceneName = scenesNames[i];
+                if (loadedScenes.Contains(sceneName)) continue;
+
+                loadedScenes.Add(sceneName);
+                scenes[i] = SceneManager.GetSceneByName(sceneName);
+                ops[i] = SceneManager.LoadSceneAsync(sceneName, i == 0 ? firstSceneLoadMode : LoadSceneMode.Additive);
+                ops[i].allowSceneActivation = false;
+            }
+
+            this.StartedLoadScene(scenes);
+
+            foreach (var item in ops)
+            {
+                if (item == null) continue;
+                if (!item.isDone) yield return null;
+            }
+
+            isLoading = false;
+            this.FinishedLoadScene(scenes);
+
+            if (waitForInput)
+            {
+                while (!Input.anyKeyDown) yield return null;
+            }
+
+            foreach (var item in ops)
+            {
+                if (item == null) continue;
+                item.allowSceneActivation = true;
+            }
+
+            if (loadingSceneLoadMode == LoadSceneMode.Additive)
+                SceneManager.UnloadSceneAsync(loadingScreenName);
+            currentCor = null;
+        }
+
+        public void RemoveSceneAsync(string sceneName, bool showLoadingScreen = true, bool waitForInput = true)
+        {
+            RemoveSceneAsync(new List<string> { sceneName} , showLoadingScreen, waitForInput);
+        }
+        public void RemoveSceneAsync(List<string> scenesNames, bool showLoadingScreen = true, bool waitForInput = true)
+        {
+            if (currentCor != null) return;
+
+            currentCor = StartCoroutine(UnloadScene(scenesNames, showLoadingScreen, waitForInput));
+        }
+
+        private IEnumerator UnloadScene(List<string> scenesNames, bool showLoadingScreen = true, bool waitForInput = true)
+        {
+            yield return new WaitForSeconds(.05f);
+
+            AsyncOperation[] ops = new AsyncOperation[scenesNames.Count];
+            if (showLoadingScreen)
+            {
+                AsyncOperation loadingOP = SceneManager.LoadSceneAsync(loadingScreenName, LoadSceneMode.Additive);
+                while (loadingOP.progress < .9f) yield return null;
+            }
+
+            Scene[] scenes = new Scene[scenesNames.Count];
+
+            for (int i = 0; i < scenesNames.Count; i++)
+            {
+                string sceneName = scenesNames[i];
+                if (!loadedScenes.Contains(sceneName)) continue;
+                loadedScenes.Remove(sceneName);
+                scenes[i] = SceneManager.GetSceneByName(sceneName);
+
+                ops[i] = SceneManager.UnloadSceneAsync(sceneName);
+                ops[i].allowSceneActivation = false;
+            }
+
+            this.StartedUnloadScene(scenes);
+
+            foreach (var item in ops)
+            {
+                Debug.Log(item.progress);
+                if (item == null) continue;
+                if (!item.isDone) yield return null;
+            }
+
+            isLoading = false;
+            this.FinishedUnloadScene(scenes);
+
+            if (waitForInput)
+            {
+                while (!Input.anyKeyDown) yield return null;
+            }
+
+            SceneManager.UnloadSceneAsync(loadingScreenName);
+            currentCor = null;
         }
     }
 }
