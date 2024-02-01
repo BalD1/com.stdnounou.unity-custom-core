@@ -153,5 +153,10 @@ namespace StdNounou.Core
             SceneManager.UnloadSceneAsync(loadingScreenName);
             currentCor = null;
         }
+
+        public void ForceAddCurrentLevelToLoadedLevelsList()
+        {
+            loadedScenes.Add(SceneManager.GetActiveScene().name);
+        }
     }
 }
