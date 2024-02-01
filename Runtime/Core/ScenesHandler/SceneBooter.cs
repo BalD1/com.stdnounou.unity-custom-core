@@ -8,7 +8,7 @@ namespace StdNounou.Core
     {
         [SerializeField] private List<string> scenesToBoot;
 
-        protected virtual void Awake()
+        protected virtual void Start()
         {
             if (scenesToBoot == null || scenesToBoot.Count == 0) 
             {
