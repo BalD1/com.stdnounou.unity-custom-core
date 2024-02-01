@@ -93,7 +93,7 @@ namespace StdNounou.Core
                 item.allowSceneActivation = true;
             }
 
-            if (loadingSceneLoadMode == LoadSceneMode.Additive)
+            if (loadingSceneLoadMode == LoadSceneMode.Additive && showLoadingScreen)
                 SceneManager.UnloadSceneAsync(loadingScreenName);
             currentCor = null;
         }
@@ -150,7 +150,8 @@ namespace StdNounou.Core
                 while (!Input.anyKeyDown) yield return null;
             }
 
-            SceneManager.UnloadSceneAsync(loadingScreenName);
+            if (showLoadingScreen)
+                SceneManager.UnloadSceneAsync(loadingScreenName);
             currentCor = null;
         }
 
