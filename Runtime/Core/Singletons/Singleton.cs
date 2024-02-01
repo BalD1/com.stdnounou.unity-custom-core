@@ -86,7 +86,7 @@ namespace StdNounou.Core
             return new List<GameObject>(GetInstances());
         }
 
-        protected static T CreateInstance()
+        public static T CreateInstance()
         {
             GameObject newInstance = new GameObject(typeof(T).ToString());
             return newInstance.AddComponent<T>();
