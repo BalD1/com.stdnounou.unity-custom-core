@@ -23,6 +23,13 @@ namespace StdNounou.Core
         {
         }
 
+        protected override void Awake()
+        {
+            base.Awake();
+            if (loadedScenes == null || loadedScenes.Count == 0)
+                ForceAddCurrentLevelToLoadedLevelsList();
+        }
+
         public void LoadSceneAsync(string sceneName, bool showLoadingScreen = true, bool waitForInput = true)
         {
             LoadSceneAsync(new List<string>() { sceneName }, showLoadingScreen, waitForInput);
