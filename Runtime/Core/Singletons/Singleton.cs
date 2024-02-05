@@ -91,5 +91,11 @@ namespace StdNounou.Core
             GameObject newInstance = new GameObject(typeof(T).ToString());
             return newInstance.AddComponent<T>();
         }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            if (instance == this) instance = null;
+        }
     } 
 }
