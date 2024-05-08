@@ -14,7 +14,7 @@ namespace StdNounou.Core
                 return;
             }
             base.Awake();
-            this.gameObject.transform.parent = null;
+            this.gameObject.transform.SetParent(null);
             DontDestroyOnLoad(this.gameObject);
 
         }

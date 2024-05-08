@@ -10,7 +10,7 @@ namespace StdNounou.Core
         [field: SerializeField] public float Lifetime { get; private set; } = 1;
         [field: SerializeField] public Vector3 TargetPosition { get; private set; }
         [field: SerializeField] public Color TextColor { get; private set; }
-        [field: SerializeField] public Vector2 Scale { get; private set; } = new Vector2(1, 1);
+        [field: SerializeField] public Vector3 Scale { get; private set; } = new Vector3(1, 1, 1);
 
         [field: SerializeField, Range(0, 100)] public float AlphaFadeLifetimeStart { get; private set; } = 50;
 
