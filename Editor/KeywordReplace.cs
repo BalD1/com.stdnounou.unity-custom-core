@@ -16,6 +16,7 @@ namespace StdNounou.Core.Editor
             if (fileExtension != ".cs" && fileExtension != ".js" && fileExtension != ".boo") return;
             index = Application.dataPath.LastIndexOf("Assets");
             path = Application.dataPath.Substring(0, index) + path;
+            if (!System.IO.File.Exists(path)) return;
             fileExtension = System.IO.File.ReadAllText(path);
 
             int fileNameIdx = path.LastIndexOf('/');
