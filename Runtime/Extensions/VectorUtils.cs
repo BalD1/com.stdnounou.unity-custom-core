@@ -63,6 +63,34 @@ namespace StdNounou.Core
                 original *= max;
             }
         }
+
+        public static Vector3 AddVec2(this Vector3 vector3, Vector2 vector2)
+        {
+            vector3.x += vector2.x;
+            vector3.y += vector2.y;
+            return vector3;
+        }
+
+        public static Vector2 AddVec3(this Vector2 vector2, Vector3 vector3)
+        {
+            vector2.x += vector3.x;
+            vector2.y += vector3.y;
+            return vector2;
+        }
+
+        public static Vector3 SubVec2(this Vector3 vector3, Vector2 vector2)
+        {
+            vector3.x -= vector2.x;
+            vector3.y -= vector2.y;
+            return vector3;
+        }
+
+        public static Vector2 SubVec3(this Vector2 vector2, Vector3 vector3)
+        {
+            vector2.x -= vector3.x;
+            vector2.y -= vector3.y;
+            return vector2;
+        }
     }
 
 }
