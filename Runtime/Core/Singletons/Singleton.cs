@@ -34,14 +34,13 @@ namespace StdNounou.Core
             this.gameObject.name = typeof(T).Name;
         }
 
-        protected override void Awake()
+        protected virtual void Awake()
         {
             if (instance != null)
             {
                 Destroy(this.gameObject);
                 return;
             }
-            base.Awake();
             instance = this as T;
         }
 
@@ -88,13 +87,13 @@ namespace StdNounou.Core
 
         public static T CreateInstance()
         {
-            GameObject newInstance = new GameObject(typeof(T).ToString());
-            return newInstance.AddComponent<T>();
+            GameObject singletonPrefab = SSO_PrefabsGetter.Instance.GetPrefab(typeof(T).Name);
+            T newInstance = singletonPrefab.Create<T>();
+            return newInstance;
         }
 
-        protected override void OnDestroy()
+        protected virtual void OnDestroy()
         {
-            base.OnDestroy();
             if (instance == this) instance = null;
         }
     } 
