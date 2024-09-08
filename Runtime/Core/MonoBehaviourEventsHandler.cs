@@ -4,12 +4,12 @@ namespace StdNounou.Core
 {
     public abstract class MonoBehaviourEventsHandler : MonoBehaviour
     {
-        protected virtual void Awake()
+        protected virtual void OnEnable()
         {
             EventsSubscriber();
         }
 
-        protected virtual void OnDestroy()
+        protected virtual void OnDisable()
         {
             EventsUnSubscriber();
         }
